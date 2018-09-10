@@ -175,7 +175,8 @@ def main(unused_argv):
 
         # Save a record of flags as a .json file in train_dir
         with open(os.path.join(FLAGS.train_dir, "flags.json"), 'w') as fout:
-            json.dump(FLAGS.__flags, fout)
+            dict_ = {key: value.default for key, value in FLAGS.__flags.items()}
+            json.dump(dict_, fout)
 
         # Make bestmodel dir if necessary
         if not os.path.exists(bestmodel_dir):
